@@ -90,7 +90,7 @@ namespace Shopping.Controllers
         // GET: Countries/Create
         public IActionResult Create()
         {
-            Country country = new(){ States = new List<State>()};
+            Country country = new() { States = new List<State>() };
             return View(country);
         }
 
@@ -134,7 +134,7 @@ namespace Shopping.Controllers
                 return NotFound();
             }
             Country country = await _context.Countries.FindAsync(id);
-            if(country == null)
+            if (country == null)
             {
                 return NotFound();
             }
@@ -162,7 +162,7 @@ namespace Shopping.Controllers
                     };
                     _context.Add(state);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Details), new {Id = model.CountryId});
+                    return RedirectToAction(nameof(Details), new { Id = model.CountryId });
                 }
                 catch (DbUpdateException dbUpdateException)
                 {
@@ -343,7 +343,7 @@ namespace Shopping.Controllers
                     };
                     _context.Update(state);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Details), new {Id = model.CountryId});
+                    return RedirectToAction(nameof(Details), new { Id = model.CountryId });
                 }
                 catch (DbUpdateException dbUpdateException)
                 {
@@ -464,7 +464,7 @@ namespace Shopping.Controllers
             {
                 _context.Countries.Remove(country);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -497,7 +497,7 @@ namespace Shopping.Controllers
                 .FirstOrDefaultAsync(s => s.Id == id);
             _context.States.Remove(state);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Details), new {Id = state.Country.Id});
+            return RedirectToAction(nameof(Details), new { Id = state.Country.Id });
         }
 
         public async Task<IActionResult> DeleteCity(int? id)
